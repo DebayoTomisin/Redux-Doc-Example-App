@@ -2,6 +2,9 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import { PostAuthor } from './PostAuthor'
+import { TimeAgo } from './TimeAgo'
+
 export const SinglePostPage = ({ match }) => {
   // match is passed by the react router as a props that contains url info that is needed
   const { postId } = match.params
@@ -22,7 +25,9 @@ export const SinglePostPage = ({ match }) => {
     <section>
       <article className="post">
         <h2>{post.title}</h2>
+        <PostAuthor userId={post.user} />
         <p className="post-content">{post.content}</p>
+        <TimeAgo timestamp={post.date} />
         <Link to={`/editPost/${post.id}`} className="button">
           Edit Post
         </Link>
