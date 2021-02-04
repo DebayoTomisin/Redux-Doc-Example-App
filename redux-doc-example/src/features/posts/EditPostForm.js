@@ -10,7 +10,6 @@ export const EditPostForm = ({ match }) => {
   const post = useSelector((state) =>
     state.posts.find((post) => post.id === postId)
   )
-  console.log(post)
 
   const [title, setTitle] = useState(post.title)
   const [content, setContent] = useState(post.content)
