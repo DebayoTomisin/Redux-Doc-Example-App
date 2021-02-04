@@ -4,19 +4,19 @@ import { sub } from 'date-fns'
 
 const initialState = [
   {
-    id: '1',
-    title: 'First Post!',
+    id: nanoid(),
+    title: 'Greeting',
     content: 'Hello There',
     date: sub(new Date(), { minutes: 15 }).toISOString(),
   },
   {
-    id: '2',
-    title: 'Second Post',
+    id: nanoid(),
+    title: 'Salutation',
     content: 'Do have a pleasant day ahead',
     date: sub(new Date(), { minutes: 10 }).toISOString(),
   },
   {
-    id: '3',
+    id: nanoid(),
     title: 'Energy is high',
     content: 'Me i no dey form, me i no dey cap, my energy is high!',
     date: sub(new Date(), { minutes: 19 }).toISOString(),

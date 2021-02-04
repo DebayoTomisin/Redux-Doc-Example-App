@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { nanoid } from '@reduxjs/toolkit'
 
 import { postAdded } from './postsSlice'
 
@@ -34,6 +33,15 @@ export const AddPostForm = () => {
     </option>
   ))
 
+  const userOption = users.map((item) => {
+    console.log(item)
+    return (
+      <option key={item.id} value={item.name}>
+        {item.name}
+      </option>
+    )
+  })
+
   return (
     <section>
       <h2>Add a New Post</h2>
@@ -46,11 +54,13 @@ export const AddPostForm = () => {
           value={title}
           onChange={onTitleChange}
         />
+
         <label htmlFor="postAuthor">Author:</label>
         <select id="postAuthor" value={userId} onChange={onAuthorChange}>
           <option value=""></option>
-          {usersOptions}
+          {userOption}
         </select>
+
         <label htmlFor="postContent">Post Content</label>
         <textarea
           id="postContent"
