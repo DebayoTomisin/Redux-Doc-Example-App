@@ -33,15 +33,6 @@ export const AddPostForm = () => {
     </option>
   ))
 
-  const userOption = users.map((item) => {
-    console.log(item)
-    return (
-      <option key={item.id} value={item.name}>
-        {item.name}
-      </option>
-    )
-  })
-
   return (
     <section>
       <h2>Add a New Post</h2>
