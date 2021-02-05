@@ -2,26 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 import { nanoid } from '@reduxjs/toolkit'
 import { sub } from 'date-fns'
 
-const initialState = [
-  {
-    id: nanoid(),
-    title: 'Greeting',
-    content: 'Hello There',
-    date: sub(new Date(), { minutes: 15 }).toISOString(),
-  },
-  {
-    id: nanoid(),
-    title: 'Salutation',
-    content: 'Do have a pleasant day ahead',
-    date: sub(new Date(), { minutes: 10 }).toISOString(),
-  },
-  {
-    id: nanoid(),
-    title: 'Energy is high',
-    content: 'Me i no dey form, me i no dey cap, my energy is high!',
-    date: sub(new Date(), { minutes: 19 }).toISOString(),
-  },
-]
+const initialState = {
+  posts: [],
+  status: 'idle',
+  error: null,
+}
 
 const postsSlice = createSlice({
   name: 'posts',
@@ -29,7 +14,7 @@ const postsSlice = createSlice({
   reducers: {
     postAdded: {
       reducer(state, action) {
-        state.push(action.payload)
+        state.posts.push(action.payload)
       },
       prepare(title, content, userId) {
         return {
@@ -45,7 +30,7 @@ const postsSlice = createSlice({
     },
     postUpdated(state, action) {
       const { id, title, content } = action.payload
-      const existingPost = state.find((post) => post.id === id)
+      const existingPost = state.posts.find((post) => post.id === id)
       if (existingPost) {
         existingPost.title = title
         existingPost.content = content
@@ -53,7 +38,7 @@ const postsSlice = createSlice({
     },
     reactionAdded(state, action) {
       const { postId, reaction } = action.payload
-      const existingPost = state.find((post) => post.id === postId)
+      const existingPost = state.posts.find((post) => post.id === postId)
       if (existingPost) {
         existingPost.reactions[reaction]++
       }
@@ -64,3 +49,8 @@ const postsSlice = createSlice({
 export const { postAdded, postUpdated, reactionAdded } = postsSlice.actions
 
 export default postsSlice.reducer
+
+export const selectAllPosts = (state) => state.posts.posts
+
+export const selectPostById = (state, postId) =>
+  state.posts.posts.find((post) => post.id === postId)
